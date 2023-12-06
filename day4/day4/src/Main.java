@@ -2,7 +2,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,11 +13,10 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         String filePath = "D:\\advent_of_code\\day4\\day4\\src\\input.txt";
-        //String filePath = "D:\\advent_of_code\\day4\\day4\\src\\example.txt";
         Path path = Paths.get(filePath);
         List<String> lines = Files.readAllLines(path);
 
-        //System.out.println("total points: " + getTotalPoints(lines));
+        System.out.println("total points: " + getTotalPoints(lines));
         System.out.println("total cards: " + getTotalCards(lines));
     }
 
@@ -51,9 +52,7 @@ public class Main {
     private static void getBonusCards(Integer cardNumber, int matches) {
         int copiesOfWinningCard = copiesOfCards.get(cardNumber);
         for (int idOfCardWon = cardNumber + 1; idOfCardWon < cardNumber + matches + 1; idOfCardWon++) {
-            //card to add new copies to
             for (int copiesToAdd = 0; copiesToAdd < copiesOfWinningCard; copiesToAdd++) {
-                //number of copies to add
                 int numberOfCopies = copiesOfCards.get(idOfCardWon);
                 if (copiesOfCards.containsKey(idOfCardWon)) {
                     copiesOfCards.put(idOfCardWon, numberOfCopies + 1);
@@ -83,7 +82,7 @@ public class Main {
         List<Integer> list = new ArrayList<>();
 
         for (Integer i : yourNumbers) {
-            if(winningNumbers.contains(i)) list.add(i);
+            if (winningNumbers.contains(i)) list.add(i);
         }
         return list;
     }
@@ -93,7 +92,7 @@ public class Main {
 
         if (!list.isEmpty()) {
             for (int num : list) {
-                res = res == 0 ? (res += 1) : (res * 2);
+                res = res == 0 ? res + 1 : res * 2;
             }
         }
 
